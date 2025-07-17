@@ -2,17 +2,11 @@
 
 [繁體中文](README.md) | [English](README_EN.md)
 
-<blockquote style="color: lightblue;">
-  <p><strong>提示！</strong><br>
-  你可以在DOCS網站中查看文檔或繼續閱讀下方文檔:https://himservice-docs.himserver.com/#HimWriter-README_Builder_introduce</p>
-</blockquote>
-
-
 ## 概覽
 
 Gemini-Pool 是一個Google Gemini API 金鑰池專案，使用 FastAPI 框架開發。它旨在幫助開發者更有效地管理和使用多個 Gemini API 金鑰，並提供自動負載平衡、金鑰輪換、失敗重試和請求日誌的監控面板。
 
-### ✨ 特點
+### 特點
 - **金鑰池管理**: 集中管理所有金鑰。
 - **自動輪換與負載平衡**: 在可用的金鑰之間輪換，將請求壓力平均分配。
 - **失敗轉移 (Failover)**: 當某個金鑰失效時，自動切換到下一個可用金鑰，確保服務可用。
@@ -22,7 +16,7 @@ Gemini-Pool 是一個Google Gemini API 金鑰池專案，使用 FastAPI 框架�
 - **存取控制**: 可設定允許訪問此代理服務的客戶端 API 金鑰，並進行流量的細緻管理。
 - **日誌管理**: 詳細的請求日誌。
 
-## 🚀 工作流程
+## 工作流程
 
 本專案的核心工作流程如下：
 
@@ -64,19 +58,19 @@ Gemini-Pool 是一個Google Gemini API 金鑰池專案，使用 FastAPI 框架�
    - 控制台將顯示 `Uvicorn running on http://0.0.0.0:8000`
    - 在瀏覽器中訪問 `http://localhost:8000` 即可進入登入頁面。
 
-## 📖 使用說明
+## 使用說明
 
-### 1. 登入管理後台
+### 登入管理後台
 - **存取位址**: `http://localhost:8000`
 - **登入**: 使用您在 `.env` 中設定的 `ADMIN_USERNAME` 和 `ADMIN_PASSWORD` 登入。成功後會導向到 `/status` 儀表板。
 
-### 2. API 代理使用
+### API 代理使用
 您的應用程式需要將原本直接請求 Google Gemini API 的地方，改為請求本代理服務的端點。
 
 - **代理端點**: `http://localhost:8000/v1beta/models/{model_id}:generateContent`
 - **驗證方式**: 在請求的 `Authorization` 標頭中帶上您在 `ALLOWED_API_KEYS` 中設定的其中一個金鑰。
 
-#### cURL 範例
+### cURL 範例
 ```bash
 # 假設您的 ALLOWED_API_KEYS 中包含 "CLIENT_KEY_1"
 curl -X POST http://localhost:8000/v1beta/models/gemini-1.5-flash:generateContent \
@@ -91,79 +85,22 @@ curl -X POST http://localhost:8000/v1beta/models/gemini-1.5-flash:generateConten
 }'
 ```
 
-## ⚙️ 自訂選項
+## ⚙️ 基礎設定
 
-### 修改 `.env` 檔案
-`gemini_key_pooler/.env` 是主要的設定檔。
+本專案的所有設定都透過 `.env` 檔案進行管理。
 
-```ini
-# --- 核心設定 ---
-# 您的 Google Gemini API 金鑰，用逗號分隔
-GEMINI_API_KEYS="YOUR_GEMINI_KEY_1,YOUR_GEMINI_KEY_2"
-
-# --- 資料庫設定 ---
-# 預設使用 SQLite。若要使用 PostgreSQL，請修改此 URL
-# 例如: DATABASE_URL="postgresql+asyncpg://user:password@host:port/dbname"
-DATABASE_URL="sqlite+aiosqlite:///./gemini_pool.db"
-
-# --- 管理後台設定 ---
-ADMIN_USERNAME="admin"
-ADMIN_PASSWORD="your_secure_password" # !!! 請務必修改為一個安全的密碼 !!!
-
-# --- 安全性設定 ---
-# 用於 JWT 簽名的密鑰，請修改為一個隨機且複雜的字串
-SECRET_KEY="a_very_secret_key_please_change_me"
-
-# --- 存取控制 ---
-# 允許呼叫此代理服務的 API 金鑰，用逗號分隔。
-# 如果留空，則任何客戶端都可以存取（不建議）。
-ALLOWED_API_KEYS="CLIENT_KEY_1,CLIENT_KEY_2"
-
-# --- 可選設定 ---
-MAX_FAILURES_PER_KEY=3          # 每個金鑰連續失敗多少次後會被標記為失效
-KEY_RECHECK_INTERVAL=3600       # 失效金鑰的健康檢查間隔（秒）
-REQUEST_TIMEOUT=120             # 請求 Gemini API 的超時時間（秒）
-ACCESS_TOKEN_EXPIRE_MINUTES=43200 # 管理員登入 Token 的有效期限（分鐘）
-LOG_RETENTION_DAYS=30           # 請求日誌保留天數（天），設為 0 表示不清理
-PORT=8000                       # 應用程式運行的埠號
-DEBUG=False                     # 是否啟用除錯模式
-```
-
-## 📜 API 端點
+查看配置:https://himservice-docs.himserver.com/#Gemini-Pool/set-env
+網站目前僅支持繁體中文，請見諒!!!
+## API 端點
 
 本專案提供兩種 API 端點：管理端點和代理端點。
 
-### 管理端點
-主要透過管理後台介面操作。以下是完整的端點列表：
+查看說明:https://himservice-docs.himserver.com/#Gemini-Pool/api
+網站目前僅支持繁體中文，請見諒!!!
 
-- **狀態與日誌**:
-  - `GET /api/status`: 獲取金鑰池和請求的統計數據。
-  - `GET /api/request_logs`: 獲取請求日誌列表。
-  - `GET /api/request_logs/{log_id}`: 獲取單一請求日誌的詳細資訊。
-- **Gemini 金鑰管理**:
-  - `GET /api/keys/{key_id}`: 獲取一個 Gemini 金鑰的完整字串。
-  - `POST /api/keys`: 新增一個 Gemini 金鑰。
-  - `POST /api/keys/bulk_add`: 批次新增多個 Gemini 金鑰。
-  - `DELETE /api/keys/{key_id}`: 刪除一個 Gemini 金鑰。
-  - `POST /api/keys/bulk_delete`: 批次刪除多個 Gemini 金鑰。
-  - `POST /api/keys/{key_id}/reset`: 重設一個 Gemini 金鑰的錯誤計數。
-  - `POST /api/keys/bulk_reset`: 批次重設多個 Gemini 金鑰的錯誤計數。
-  - `POST /api/keys/{key_id}/test`: 測試一個 Gemini 金鑰的有效性。
-- **客戶端存取金鑰管理**:
-  - `GET /api/allowed_keys`: 獲取所有允許的客戶端 API 金鑰列表。
-  - `POST /api/allowed_keys`: 新增一個允許的客戶端 API 金鑰。
-  - `PUT /api/allowed_keys/{key_id}`: 更新一個允許的客戶端 API 金鑰的設定。
-  - `DELETE /api/allowed_keys/{key_id}`: 刪除一個允許的客戶端 API 金鑰。
+## 報告問題
 
-### Gemini 代理端點
-- `POST /v1beta/models/{model_id}:generateContent`: 代理標準的 Gemini `generateContent` 請求。
-- `POST /v1beta/models/{model_id}:streamGenerateContent`: 代理支援串流的 Gemini `streamGenerateContent` 請求。
+## 開發與貢獻
 
-## 🐞 報告問題
-如果發現 bug 或有功能建議，請在 GitHub 創建 Issue，提供詳細描述和重現步驟。
-
-## 🤝 開發與貢獻
-歡迎任何形式的貢獻！如果您有興趣，請 Fork 本專案並提交 Pull Request。
-
-## 📄 許可證
-本專案採用 [MIT License](LICENSE) 授權。請閱讀 `LICENSE` 文件以獲取更多資訊。
+## 許可證
+請閱讀 `LICENSE` 文件。

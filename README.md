@@ -2,6 +2,9 @@
 
 [繁體中文](README.md) | [English](README_EN.md)
 
+你可以前往此地查看最新版本的README
+https://himservice-docs.himserver.com/#Gemini-Pool/intro
+
 ## 概覽
 
 Gemini-Pool 是一個Google Gemini API 金鑰池專案，使用 FastAPI 框架開發。它旨在幫助開發者更有效地管理和使用多個 Gemini API 金鑰，並提供自動負載平衡、金鑰輪換、失敗重試和請求日誌的監控面板。
@@ -89,13 +92,13 @@ curl -X POST http://localhost:8000/v1beta/models/gemini-1.5-flash:generateConten
 
 本專案的所有設定都透過 `.env` 檔案進行管理。
 
-查看配置:https://himservice-docs.himserver.com/#Gemini-Pool/set-env
+[前往DOCS查看配置](https://himservice-docs.himserver.com/#Gemini-Pool/set-env)
 網站目前僅支持繁體中文，請見諒!!!
 ## API 端點
 
 本專案提供兩種 API 端點：管理端點和代理端點。
 
-查看說明:https://himservice-docs.himserver.com/#Gemini-Pool/api
+[前往DOCS查看說明](https://himservice-docs.himserver.com/#Gemini-Pool/api)
 網站目前僅支持繁體中文，請見諒!!!
 
 ## 報告問題

@@ -1,6 +1,6 @@
 # Gemini-Pool - Gemini API Key Pool
 
-[Traditional Chinese](README.md) | [English](README_EN.md)
+[繁體中文](README.md) | [English](README_EN.md)
 
 ## Overview
 

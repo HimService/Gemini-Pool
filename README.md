@@ -2,6 +2,12 @@
 
 [繁體中文](README.md) | [English](README_EN.md)
 
+<blockquote style="color: lightblue;">
+  <p><strong>提示！</strong><br>
+  你可以在DOCS網站中查看文檔或繼續閱讀下方文檔:https://himservice-docs.himserver.com/#HimWriter-README_Builder_introduce</p>
+</blockquote>
+
+
 ## 概覽
 
 Gemini-Pool 是一個Google Gemini API 金鑰池專案，使用 FastAPI 框架開發。它旨在幫助開發者更有效地管理和使用多個 Gemini API 金鑰，並提供自動負載平衡、金鑰輪換、失敗重試和請求日誌的監控面板。

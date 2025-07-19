@@ -2,6 +2,11 @@
 
 [繁體中文](README.md) | [English](README_EN.md)
 
+<blockquote style="color: red;">
+  <p><strong>警告！</strong><br>
+  Gemini-Pool v0.17a版本存在重大漏洞，建議升級至Gemini-Pool v0.59a來修復已知漏洞</p>
+</blockquote>
+
 你可以前往此地查看最新版本的README
 https://himservice-docs.himserver.com/#Gemini-Pool/intro
 

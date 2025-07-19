@@ -2,6 +2,12 @@
 
 [繁體中文](README.md) | [English](README_EN.md)
 
+<blockquote style="color: red;">
+  <p><strong>Warning!</strong><br>
+  Gemini-Pool version v0.17a contains critical vulnerabilities. It is strongly recommended to upgrade to Gemini-Pool v0.59a to fix the known issues.</p>
+</blockquote>
+
+
 ## Overview
 
 Gemini-Pool is a Google Gemini API key pool project developed with the FastAPI framework. It aims to help developers manage and use multiple Gemini API keys more effectively, providing features like automatic load balancing, key rotation, failover retry, and a monitoring dashboard for request logs.
